@@ -2,6 +2,7 @@
   "name": "main",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://kp-pandey.github.io/main/",
   "proxy": "http://localhost:3010/",
   "dependencies": {
     "@devexpress/dx-react-chart": "^2.4.0",
@@ -16,10 +17,12 @@
     "@testing-library/user-event": "^7.2.1",
     "axios": "^0.19.2",
     "bootstrap": "^4.4.1",
+    "concurrently": "^5.1.0",
     "devextreme": "19.2-stable",
     "devextreme-react": "19.2-stable",
     "devextreme-themebuilder": "19.2-stable",
     "formik": "^2.1.4",
+    "gh-pages": "^2.2.0",
     "material-ui": "^0.20.2",
     "mdbreact": "^4.25.0",
     "react": "^16.12.0",
@@ -36,12 +39,15 @@
     "simple-react-validator": "^1.4.4",
     "yup": "^0.28.1"
   },
-    "scripts": {
-    "start": "react-scripts start",
-    
+  "scripts": {
+    "start":  "concurrently \"npm run server\" \"npm run client\"",
+    "server":"node server.js",
+    "client":"react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -57,6 +63,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-    
   }
 }

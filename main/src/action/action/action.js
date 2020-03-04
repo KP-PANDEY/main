@@ -54,13 +54,7 @@ export const Register= (data) => {
                         });
                         return resolve(response);
                     }
-                    // else{
-                    //     dispatch({
-                    //         type: UNAUTHORISEZ,
-                    //         data: response.data
-                    //     });
-                    //     return resolve(response);    
-                    // }
+                   
                 }).catch((error) => {
                     if (error) {
                         dispatch({ type: ERROR, data: "error" })

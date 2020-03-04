@@ -78,7 +78,7 @@ class Admin extends Component {
 
 
   componentWillMount() {
-    axios.post("PlacementGraphdata")
+    axios.post("/PlacementGraphdata")
       .then((res) => {
         console.log("componentWillMount of graph Data", res.data)
         this.setState({ graphData: res.data })
