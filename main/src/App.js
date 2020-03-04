@@ -37,54 +37,57 @@ import EditUser from './Container/User/EditUser'
 import PDF from './Container/User/PDF'
 
 class App extends Component {
-  render(){
-    const admin="Admin";
-    const user="User";
-    const role=localStorage.getItem("role")
+ 
+  render() {
+    const admin = "Admin";
+    const user = "User";
+    const role = localStorage.getItem("role")
     console.log(role);
-  return (
-  <Router>
-    <Header></Header> 
-      
-       
-          <Switch>
-            <CRoute exact cprivat crole={[admin]} path="/Company" component={Company} />
-            <CRoute exact cprivat crole={[admin]} path="/CompanyDetails" component={CompanyDetails} />
-            <CRoute exact cprivat crole={[admin]} path="/Call" component={Call} />
-            <CRoute exact cprivat crole={[admin]} path="/EditDrive" component={EditDrive} />
-            <CRoute exact cprivat crole={[admin]} path="/viewDRIVE" component={ViewDRIVE} />
-            <CRoute exact cprivat crole={[admin]} path="/Notification" component={Notification} />
-           
-            
-            <CRoute exact cprivat crole={[admin]} path="/View" component={View} />
-            <CRoute exact cprivat crole={[admin]} path="/Call" component={Call} />
-            <CRoute exact cprivat crole={[admin]} path="/try" component={Try} />
-            <CRoute exact cprivat crole={[admin]} path="/ViewStudent" component={ViewStudent}/>
-            <CRoute exact cprivat crole={[admin]} path="/Placement" component={Placement} />
-            <CRoute exact cprivat crole={[admin]} path="/Approve" component={Approve} />
-            <CRoute exact cprivat crole={[admin]} path="/Approved" component={Pending} />
-            <CRoute exact cprivat crole={[admin]} path="/Drive" component={Drive} />
-            <CRoute exact cprivat crole={[user]} path="/UpcomingDrive" component={UpcomingDrive} />
-            <CRoute exact cprivat crole={[user]} path="/EditUser" component={EditUser} />
-            <CRoute exact cprivat crole={[user]} path="/PDF" component={PDF} />
-            <CRoute exact path='/' component={SignIn} />
-            <CRoute exact path='/SignIn' component={SignIn} />
-            {/* <CRoute exact path="/SignIn" component={SignIn} />  */}
-            <CRoute exact path="/SignUp" component={SignUp} />
-            <CRoute exact cprivate  crole={[admin]}  path="/Admin" component={Admin} />
-            <CRoute exact cprivate  crole={[admin]}  path="/Place" component={Placed} />
-            <CRoute exact cprivate crole={[user]} path="/User" component={User} />
-            <CRoute cprivate crole={[admin]} path='/P2' component={P2}></CRoute>
-
-            <CRoute cprivate path='/unauthorised-access' component={unauthorised}></CRoute>
-            <CRoute component={NotFound}></CRoute>        
-          </Switch>
-
-  {/* <Footer></Footer> */}
-  </Router>
  
- 
-  );
-}
+    return (
+
+      <Router>
+        <Header></Header>
+
+
+        <Switch>
+          <CRoute exact cprivat crole={[admin]} path="/Company" component={Company} />
+          <CRoute exact cprivat crole={[admin]} path="/CompanyDetails" component={CompanyDetails} />
+          <CRoute exact cprivat crole={[admin]} path="/Call" component={Call} />
+          <CRoute exact cprivat crole={[admin]} path="/EditDrive" component={EditDrive} />
+          <CRoute exact cprivat crole={[admin]} path="/viewDRIVE" component={ViewDRIVE} />
+          <CRoute exact cprivat crole={[admin]} path="/Notification" component={Notification} />
+
+
+          <CRoute exact cprivat crole={[admin]} path="/View" component={View} />
+          <CRoute exact cprivat crole={[admin]} path="/Call" component={Call} />
+          <CRoute exact cprivat crole={[admin]} path="/try" component={Try} />
+          <CRoute exact cprivat crole={[admin]} path="/ViewStudent" component={ViewStudent} />
+          <CRoute exact cprivat crole={[admin]} path="/Placement" component={Placement} />
+          <CRoute exact cprivat crole={[admin]} path="/Approve" component={Approve} />
+          <CRoute exact cprivat crole={[admin]} path="/Approved" component={Pending} />
+          <CRoute exact cprivat crole={[admin]} path="/Drive" component={Drive} />
+          <CRoute exact cprivat crole={[user]} path="/UpcomingDrive" component={UpcomingDrive} />
+          <CRoute exact cprivat crole={[user]} path="/EditUser" component={EditUser} />
+          <CRoute exact cprivat crole={[user]} path="/PDF" component={PDF} />
+          <CRoute exact path='/' component={SignIn} />
+          <CRoute exact path='/SignIn' component={SignIn} />
+          {/* <CRoute exact path="/SignIn" component={SignIn} />  */}
+          <CRoute exact path="/SignUp" component={SignUp} />
+          <CRoute exact cprivate crole={[admin]} path="/Admin" component={Admin} />
+          <CRoute exact cprivate crole={[admin]} path="/Place" component={Placed} />
+          <CRoute exact cprivate crole={[user]} path="/User" component={User} />
+          <CRoute cprivate crole={[admin]} path='/P2' component={P2}></CRoute>
+
+          <CRoute cprivate path='/unauthorised-access' component={unauthorised}></CRoute>
+          <CRoute component={NotFound}></CRoute>
+        </Switch>
+
+        {/* <Footer></Footer> */}
+      </Router>
+
+
+    );
+  }
 }
 export default App;

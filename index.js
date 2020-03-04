@@ -1,5 +1,6 @@
 const express = require('express')
 const app = express()
+const path = require('path') 
 
 var bodyParser = require('body-parser')
 var jwt = require('jsonwebtoken');
@@ -356,6 +357,10 @@ app.post("/UpdateUser", (req, res) => {
   connection.query("UPDATE user SET  `Name`='" + data.Name + "',FatherName='" + data.FatherName + "', `MothersName`='" + data.MotherName + "', `MobileNumber`='" + data.MobileNumber + "', `Branch`='" + data.Branch + "', `DOB`='" + data.DOB + "', `Year`='" + data.Year + "', `Gender`='" + data.Gender + "', `RollNo`='" + data.RollNo + "', `Age`='" + data.Age + "', `Email`='" + data.Email + "', `Address`='" + data.Address + "', `SSC`='" + data.SSC + "', `HSC`='" + data.HSC + "', `BTECHAGGREGATE`='" + data.Btech + "', `Backlogs`='" + data.Backlogs + "', `SSCSCHOOLNAME`='" + data.SchoolSSC + "', `HSCSCHOOLNAME`='" + data.SchoolHHC + "', `Password`='" + data.Password + "', `image`='" + data.image + "' WHERE Name='" + req.body.name + "'")
 })
 
+app.use(express.static(path.join(__dirname,"client/build"))) 
+app.get("*",(req,res) => { 
+    res.sendFile(path.join(__dirname + "/main/build/index.html")) 
+}) 
 
 app.listen(3010)
 console.log('Node app is running on port 3010');
