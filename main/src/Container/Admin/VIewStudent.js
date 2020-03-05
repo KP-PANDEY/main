@@ -297,6 +297,7 @@ export default function EnhancedTable(props) {
   const Export = () => {
   //  TOEXPORT();
     //const myObject = localStorage.getItem("ViewStudent")
+    if(selected.length>0){
     const arr =myselected;
     var data = [];
     console.log("duniya bar",rows)
@@ -307,7 +308,7 @@ export default function EnhancedTable(props) {
       arr[k].RollNo,
       )
     }
-  
+    
   const element = document.createElement("a");
     const file = new Blob([data]);
     element.href = URL.createObjectURL(file);
@@ -320,7 +321,10 @@ export default function EnhancedTable(props) {
     myselected=[];
    // props.history.push("/ViewStudent");
 
-
+  }
+  else{
+    alert("NOTHING SELECTED ")
+  }
   };
 
 
@@ -410,12 +414,31 @@ export default function EnhancedTable(props) {
 
 
   const handleClick = (event, row) => {
-    //handleExport();
-    
-    myselected=myselected.concat(row)
-    console.log("phir se",myselected)
     let name=row.Name
     const selectedIndex = selected.indexOf(name);
+    //handleExport();
+    if (selectedIndex === -1) {
+      myselected=myselected.concat(row)
+    } else if (selectedIndex === 0) {
+      myselected=[]
+      //newSelected = newSelected.concat(selected.slice(1));
+    }
+    //  else if (selectedIndex === selected.length - 1) {
+
+    //   myselected = myselected.pop(selected);
+    //  } 
+    //  else if (selectedIndex > 0) {
+    //   newSelected = newSelected.concat(
+    //     selected.slice(0, selectedIndex),
+    //     selected.slice(selectedIndex + 1),
+    //   );
+    // }
+
+    
+    
+    console.log("phir se",myselected)
+  
+  
     let newSelected = [];
 
     if (selectedIndex === -1) {
