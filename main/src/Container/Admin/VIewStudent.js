@@ -28,6 +28,11 @@ function createData(Name, Branch, RollNo, Email, SSC, HSC, BTECHAGGREGATE) {
   return { Name, Branch, RollNo, Email, SSC, HSC, BTECHAGGREGATE };
 
 }
+var myselected= [];
+function exportData(Name,Branch,RollNo) {
+  return [Name,Branch,RollNo];
+
+}
 const drawerWidth = 240;
 var feild = false;
 var placedin;
@@ -290,11 +295,23 @@ export default function EnhancedTable(props) {
     setOrderBy(property);
   };
   const Export = () => {
-    console.log("export")
-    const element = document.createElement("a");
-    const file = new Blob([selected]);
+    TOEXPORT();
+    const myObject = localStorage.getItem("ViewStudent")
+    const arr =myselected;
+    var data = [];
+    console.log("duniya bar",rows)
+    for (var k in arr) {
+      data[k]=exportData(
+      '\n'+arr[k].Name,
+      arr[k].Branch,
+      arr[k].RollNo,
+      )
+    }
+  
+  const element = document.createElement("a");
+    const file = new Blob([data]);
     element.href = URL.createObjectURL(file);
-    element.download = "myFile.txt";
+    element.download = "myFile.csv";
     document.body.appendChild(element);
     element.click();
 
@@ -303,12 +320,29 @@ export default function EnhancedTable(props) {
 
 
   };
+
+
+  const TOEXPORT=()=>{
+     
+      for(var k in selected){
+        for(var j in rows){
+            if(selected[k]==rows[j].Name)
+            {
+              myselected[k]=rows[j];
+            }
+        }
+
+      }
+
+      console.log(myselected,"new selected");
+
+  }
   const ADDTOPLACED = () => {
     // AlertDialog();
     console.log(selected)
     console.log(placedin)
     console.log(placedon)
-    
+
     //console.log(placedon.slice(0, 4));
     if (placedin && placedon) {
       const data = {
@@ -318,8 +352,8 @@ export default function EnhancedTable(props) {
         Year: placedon.slice(0, 4)
       }
       //  alert(<input type="text"/>)
-      axios.post("http://localhost:3010/PlacementDetails",data)
-      axios.post("http://localhost:3010/Plan",data)
+      axios.post("http://localhost:3010/PlacementDetails", data)
+      axios.post("http://localhost:3010/Plan", data)
       axios.post("http://localhost:3010/Placed", data)
         .then(res => {
           alert(res.data)
@@ -328,8 +362,8 @@ export default function EnhancedTable(props) {
           localStorage.removeItem("Pending")
           localStorage.removeItem("drive")
           localStorage.removeItem("Placed")
-         // window.location.href = "/Admin"
-         props.history.push("/")
+          // window.location.href = "/Admin"
+          props.history.push("/")
         })
     } else {
       alert("PLACED IN FEILD IS REQUIRED TO BE FILLED");
@@ -365,8 +399,9 @@ export default function EnhancedTable(props) {
 
 
 
-  const handleClick = (event, name, Branch) => {
-    const selectedIndex = selected.indexOf(name, Branch);
+  const handleClick = (event, name) => {
+    //handleExport();
+    const selectedIndex = selected.indexOf(name);
     let newSelected = [];
 
     if (selectedIndex === -1) {
@@ -383,7 +418,13 @@ export default function EnhancedTable(props) {
     }
 
     setSelected(newSelected);
+    console.log(newSelected,"selected")
   };
+
+  //  const handleExport =(event, value)=>{
+  //    console.log(value,"very ")
+
+  //  } 
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -398,7 +439,8 @@ export default function EnhancedTable(props) {
     setDense(event.target.checked);
   };
 
-  const isSelected = name => selected.indexOf(name) !== -1;
+  const isSelected = name => selected.indexOf(name.Name) !== -1;
+ 
 
 
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
@@ -430,18 +472,18 @@ export default function EnhancedTable(props) {
               {stableSort(rows, getSorting(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
-                  const isItemSelected = isSelected(row.Name);
+                  const isItemSelected = isSelected(row);
                   const labelId = `enhanced-table-checkbox-${index}`;
 
 
                   return (
                     <TableRow
                       hover
-                      onClick={event => handleClick(event, row.Name, row.Branch)}
+                      onClick={event => handleClick(event, row.Name)}
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}
-                      key={row.Name}
+                      key={row}
                       selected={isItemSelected}
                     >
                       <TableCell padding="checkbox">

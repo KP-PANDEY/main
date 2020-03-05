@@ -309,6 +309,7 @@ app.post("/PlacementDetails", (req, res) => {
 })
 
 app.post("/Plan", (req, res) => {
+  console.log(req.body,"just")
   req.body.name.forEach(element => {
     connection.query("SELECT Branch FROM user WHERE Name='" + element + "'",
       function (err, result, fields) {

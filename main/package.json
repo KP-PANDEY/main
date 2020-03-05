@@ -2,7 +2,7 @@
   "name": "main",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://kp-pandey.github.io/main/",
+  "homepage": "https://KP-PANDEY.github.io/main/",
   "proxy": "http://localhost:3010/",
   "dependencies": {
     "@devexpress/dx-react-chart": "^2.4.0",
