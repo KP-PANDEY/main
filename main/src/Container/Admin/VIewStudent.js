@@ -295,8 +295,8 @@ export default function EnhancedTable(props) {
     setOrderBy(property);
   };
   const Export = () => {
-    TOEXPORT();
-    const myObject = localStorage.getItem("ViewStudent")
+  //  TOEXPORT();
+    //const myObject = localStorage.getItem("ViewStudent")
     const arr =myselected;
     var data = [];
     console.log("duniya bar",rows)
@@ -316,27 +316,29 @@ export default function EnhancedTable(props) {
     element.click();
 
     console.log(selected)
-
+    //props.history.push("/View")
+    myselected=[];
+   // props.history.push("/ViewStudent");
 
 
   };
 
 
-  const TOEXPORT=()=>{
+  // const TOEXPORT=()=>{
      
-      for(var k in selected){
-        for(var j in rows){
-            if(selected[k]==rows[j].Name)
-            {
-              myselected[k]=rows[j];
-            }
-        }
+  //     for(var k in selected){
+  //       for(var j in rows){
+  //           if(selected[k]==rows[j].Name)
+  //           {
+  //             myselected[k]=rows[j];
+  //           }
+  //       }
 
-      }
+  //     }
 
-      console.log(myselected,"new selected");
+  //     console.log(myselected,"new selected");
 
-  }
+  // }
   const ADDTOPLACED = () => {
     // AlertDialog();
     console.log(selected)
@@ -392,15 +394,27 @@ export default function EnhancedTable(props) {
     if (event.target.checked) {
       const newSelecteds = rows.map(n => n.Name);
       setSelected(newSelecteds);
+      myselected=rows
+      console.log("selected all",myselected)
       return;
+
     }
+    
     setSelected([]);
+    myselected=[];
+   
+   
+   
   };
 
 
 
-  const handleClick = (event, name) => {
+  const handleClick = (event, row) => {
     //handleExport();
+    
+    myselected=myselected.concat(row)
+    console.log("phir se",myselected)
+    let name=row.Name
     const selectedIndex = selected.indexOf(name);
     let newSelected = [];
 
@@ -479,7 +493,7 @@ export default function EnhancedTable(props) {
                   return (
                     <TableRow
                       hover
-                      onClick={event => handleClick(event, row.Name)}
+                      onClick={event => handleClick(event, row)}
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}
